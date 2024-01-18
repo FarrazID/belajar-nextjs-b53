@@ -1,0 +1,30 @@
+Silabus Materi
+-----------------------------------------------
+Pekan 1
+- Setup NextJS
+- Setup eslint di NextJS
+- Membuat Component di NextJS
+- Styling di NextJS
+- Membuat layout page di NextJS
+
+Pekan 2
+- Menambahkan Metadata di NextJS
+- Routing di NextJS
+- Dynamic Routes di NextJS
+- Api Routes di NextJS
+- Next Image dan Dynamic import di NextJS
+
+Pekan 3
+- Data Fetching di NextJS
+- Rest API dan CRUD Part 1 di NextJS
+- Rest API dan CRUD Part 2 di NextJS
+
+- Custom Hooks di NextJS
+- Data Fetching with SWR di NextJS
+
+- Middleware di NextJS
+- State Management with Context di NextJS
+- Deployment ke vercel
+
+Final Project - Membuat aplikasi social media
+Final Project - Melanjutkan aplikasi social media
