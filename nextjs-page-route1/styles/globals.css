@@ -105,3 +105,11 @@ a {
     color-scheme: dark;
   }
 }
+
+.background-red {
+  background-color: red;
+}
+
+.text-white {
+  color: white;
+}

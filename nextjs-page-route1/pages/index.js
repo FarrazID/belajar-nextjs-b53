@@ -1,9 +1,10 @@
 import Head from 'next/head'
 // import Image from 'next/image'
 import { Inter } from 'next/font/google'
-// import styles from '@/styles/Home.module.css'
+import styles from '@/styles/Home.module.css'
 
 import Header from '@/components/header'
+import Content from '@/components/content'
 import Footer from '@/components/footer'
 
 
@@ -19,7 +20,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <p>Content Area</p>
+      {/* <p>Content Area</p> */}
+      <Content />
       <Footer />
     </div>
   )
