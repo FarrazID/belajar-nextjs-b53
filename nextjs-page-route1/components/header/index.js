@@ -1,3 +1,4 @@
+import Link from "next/link";
 import withAuth from "../with-auth";
 // import Menu from "../menu";
 import styles from "./styles.module.css";
@@ -12,7 +13,11 @@ function Header() {
     //   <p>Header section</p>
     // </div>
     <div className={styles.header}>
-      <p>Header-section</p>
+      <ul>
+        <li><Link href="/">Home</Link></li>
+        <li><Link href="/profile">Profile</Link></li>
+        <li><Link href="/users">User</Link></li>
+      </ul>
     </div>
   );
 };

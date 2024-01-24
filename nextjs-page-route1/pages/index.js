@@ -37,9 +37,7 @@ export default function Main({ children }) {
         <p>Home page</p>
       </Layout>
     </>
-
   )
-
 };
 
 
