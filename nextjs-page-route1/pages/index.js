@@ -11,7 +11,8 @@ import Layout from "@/layout"
 
 // const inter = Inter({ subsets: ['latin'] })
 
-//! call to all-page route (without layout)
+//! default: call to all routing-pages (without layout component)
+//? section <Head> -- moved into layout component
 // export default function Home() {
 //   return (
 //     <div>
@@ -28,11 +29,11 @@ import Layout from "@/layout"
 //     </div>
 //   )
 
-//! if using layout
-export default function Main() {
+//! if using 'layout component' (as wrapper)
+export default function Main({ children }) {
   return (
     <>
-      <Layout>
+      <Layout metaTitle="Home">
         <p>Home page</p>
       </Layout>
     </>
