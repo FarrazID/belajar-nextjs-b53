@@ -8,6 +8,7 @@
 // import Footer from '@/components/footer'
 
 import Layout from "@/layout"
+import { useEffect } from "react"
 
 // const inter = Inter({ subsets: ['latin'] })
 
@@ -31,6 +32,14 @@ import Layout from "@/layout"
 
 //! if using 'layout component' (as wrapper)
 export default function Main({ children }) {
+  useEffect(() => {
+    fetch("/api/hello")
+      .then((res) => res.json())
+      .then((res) => console.log('response =>', res))
+      .catch((err) => console.log('error =>', err));
+  }, []);
+
+
   return (
     <>
       <Layout metaTitle="Home">
