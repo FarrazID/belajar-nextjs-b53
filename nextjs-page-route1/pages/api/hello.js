@@ -7,13 +7,13 @@
 // }
 
 //! API Local -- call External API
+//? when tracking from client side (browser) -- it will be hidden (isolate)
 export default async function handler(req, res) {
   try {
-    const response = await (q).json();
+    const response = await (await fetch("https://dummyjson.com/users")).json();
     res.status(200).json({ ...response });
 
   } catch (error) {
     // res.status(500).json({ error })
   }
-
 }
