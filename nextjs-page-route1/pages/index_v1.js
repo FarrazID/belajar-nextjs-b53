@@ -1,3 +1,5 @@
+//! THIS IS 'index.js' -- with no 'dynamic route' (from "next/dynamic")
+
 // import Head from 'next/head'
 // import Image from 'next/image'
 // import { Inter } from 'next/font/google'
@@ -32,7 +34,7 @@ import { useEffect } from "react"
 
 //! if using 'layout component' (as wrapper)
 export default function Main({ children }) {
-  //TODO: simulate to use Local API ("/api/hello") -- display response in Console
+  //TODO: simulate to fetch data -- using Local API ("/api/hello") -- display response in Console
   useEffect(() => {
     fetch("/api/hello")
       .then((res) => res.json())
