@@ -9,16 +9,19 @@ export default function Notes({ notes }) {
   console.log('notes data =>', notes);
   return (
     <>
-      <LayoutComponent metaTitle="Notes Top">
+      <LayoutComponent metaTitle="Notes @Top">
         {/* <p>-- Notes page (test Data Fetching) --</p> */}
         {/* use map() to loop & display data (from array) */}
         {notes.data.map((item) => (
 
+          //! TEST: to check data fetching & display data -- without <Link>
           // <div style={{ border: "1px solid grey", margin: "5px", padding: "5px" }}>
           //   <p>{item.title}</p>
           //   <p>{item.description}</p>
           // </div>
 
+          //! when we click note-title > it will open it's detail page 
+          //? the detail for each note -- is in pages/notes/[id].js (dynamic route)
           <div>
             <Link href={`/notes/${item.id}`}>{item.title}</Link>
           </div>
@@ -37,8 +40,10 @@ export async function getStaticProps() {
   // const res = await fetch('https://api.github.com/repos/vercel/next.js')
   const res = await fetch("https://paace-f178cafcae7b.nevacloud.io/api/notes");
   const notes = await res.json();
+
   // return { props: { notes } } 
   //! without revalidate - will not update 'client data' when API data changes (BE)
+
   return { props: { notes }, revalidate: 10 };
   //it will re-rendered every 10 seconds
 }
