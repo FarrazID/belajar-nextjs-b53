@@ -13,7 +13,7 @@ export default function Layout({ children, metaTitle, metaDescription }) {
     <div>
       <Head>
         {/* add prop: metaTitle */}
-        <title>Create Next App - {metaTitle}</title>
+        <title>{`Create Next App - ${metaTitle}`}</title>
         {/* if error exist, use template literals (literal string) as below:  */}
         {/* <title>{`Create Next App - ${metaTitle}`}</title> */}
         <meta
