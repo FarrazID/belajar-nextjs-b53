@@ -1,5 +1,7 @@
 import dynamic from "next/dynamic";
 import {
+  Box,
+  Flex,
   Grid,
   GridItem,
   Card,
@@ -9,94 +11,79 @@ import {
   Input,
   Textarea,
 } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import { useState } from "react";
 
-// import { useMutation } from "@/hooks/useMutation";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 const LayoutComponent = dynamic(() => import("@/layout"));
 
-//! --------- TUGAS: H12 - REST API + CRUD ( Read + Create ) -------------
-export default function AddNotes() {
-  // const { mutate } = useMutation();
+//! --------- TUGAS: H13 - REST API + CRUD ( Edit + Update ) -------------
+export default function EditNotes() {
 
   const router = useRouter();
+  const { id } = router?.query;
+  const [notes, setNotes] = useState();
 
-  //TODO: 3) define 'SetNotes' -- to save data from input: Title, Description
-  const [notes, setNotes] = useState({
-    title: "",
-    description: "",
-  });
-
-  //TODO: 4) define 'HandleSubmit()' -- to save data from 'SetNotes' -> to API(server)
-  //? to call API -- asynchronously
   const HandleSubmit = async () => {
     try {
       const response = await fetch(
-        "https://paace-f178cafcae7b.nevacloud.io/api/notes",
+        `https://paace-f178cafcae7b.nevacloud.io/api/notes/update/${id}`,
         {
-          method: "POST",
+          method: "PATCH",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(notes),
+          body: JSON.stringify({
+            title: notes?.title,
+            description: notes?.description,
+          }),
         }
       );
       const result = await response.json();
-      console.log("result =>", result);
-
       if (result?.success) {
-        //! if result= success -- data sent to /notes
         router.push("/notes");
       }
-    } catch (error) {
-      console.log(error);
-    }
-  }
+    } catch (error) { }
+  };
 
-  // const HandleSubmit = async () => {
-  //   const response = await mutate({
-  //     url: "https://paace-f178cafcae7b.nevacloud.io/api/notes",
-  //     payload: notes,
-  //   });
-  //   if (response?.success) {
-  //     router.push("/notes");
-  //   }
-  // };
+  useEffect(() => {
+    async function fetchingData() {
+      const res = await fetch(
+        `https://paace-f178cafcae7b.nevacloud.io/api/notes/${id}`
+      );
+      const listNotes = await res.json();
+      setNotes(listNotes?.data);
+    }
+    fetchingData();
+  }, [id]);
 
   return (
     <>
       <LayoutComponent metaTitle="Notes">
-        {/* //TODO: 1) using component <Card> -- as container */}
-        {/* -- title, description, submit  */}
         <Card margin="5" padding="5">
+          <Heading>Edit Notes</Heading>
 
-          <Heading>Add Notes</Heading>
-
-          {/* //TODO: 2) using style component <Grid> -- <GridItem> */}
           <Grid gap="5">
             {/* //! grid item: Title */}
             <GridItem>
               <Text>Title</Text>
-              {/* <Input type="text" /> */}
               <Input
                 type="text"
+                value={notes?.title || ""}
                 onChange={(event) =>
                   setNotes({ ...notes, title: event.target.value })
                 }
-              //! data from input Text -- will be saved in 'SetNotes'
               />
             </GridItem>
 
             {/* //! grid item: Description */}
             <GridItem>
               <Text>Description</Text>
-              {/* <Textarea /> */}
               <Textarea
+                value={notes?.description || ""}
                 onChange={(event) =>
                   setNotes({ ...notes, description: event.target.value })
                 }
-              //! data from input Text -- will be saved in 'SetNotes'
               />
             </GridItem>
 

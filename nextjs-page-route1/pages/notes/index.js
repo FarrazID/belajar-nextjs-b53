@@ -25,6 +25,30 @@ export default function Notes() {
   //-- from 'listNotes' -- to setNotes(listNotes); --> step: 3
   const [notes, setNotes] = useState([]);
 
+  //TODO: 9) define function 'HandleDelete()' -- to delete data (from API)
+  //! -- Next, we will use Custom Hook -- useMutation()
+  const HandleDelete = async (id) => {
+    try {
+      const response = await fetch(
+        `https://paace-f178cafcae7b.nevacloud.io/api/notes/delete/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
+      const result = await response.json();
+      console.log("result =>", result);
+
+      if (result?.success) {
+        //! if result= success -- data sent to /notes
+        router.reload();
+        // use reload --> to re-run 'useEffect' -> then get new (updated) data
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
   //TODO: 1) call API -- via 'useEffect()' <-- client side data fetching
   useEffect(() => {
     async function FetchingData() {
@@ -85,9 +109,13 @@ export default function Notes() {
                           flex="1" colorScheme="purple" >
                           Edit
                         </Button>
-                        <Button flex='1' colorScheme="red" >
+
+                        <Button
+                          onClick={() => HandleDelete(item?.id)}
+                          flex='1' colorScheme="red" >
                           Delete
                         </Button>
+
                         {/* <Button flex='1' variant='ghost' leftIcon={<BiShare />}>
                           Share
                         </Button> */}
