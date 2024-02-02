@@ -34,7 +34,9 @@ import { useEffect } from "react"
 
 //! if using 'layout component' (as wrapper)
 export default function Main({ children }) {
-  //TODO: simulate to fetch data -- using Local API ("/api/hello") -- display response in Console
+  //TODO: simulate to fetch data -- using Local API ("/api/hello") 
+  //-- client side data fetching
+  //-- display response in Console
   useEffect(() => {
     fetch("/api/hello")
       .then((res) => res.json())

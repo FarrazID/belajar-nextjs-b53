@@ -1,52 +1,109 @@
 import dynamic from "next/dynamic";
-import Link from "next/link";
+// import Link from "next/link";
+
+import {
+  Box, Flex, Grid, GridItem, Card, CardBody,
+  CardHeader, CardFooter, Heading, Text, Button, Spinner
+} from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 
 
-//! Using dynamic import (use wrapper: 'LayoutComponent')
-const LayoutComponent = dynamic(() => import('@/layout')); // <-- use dynamic() to import component
-export default function Notes({ notes }) {
-  //TODO: use console to check data fetching -- & inspect browser
+//! Using dynamic import (as new wrapper: 'LayoutComponent')
+const LayoutComponent = dynamic(() => import('@/layout'));
+// use dynamic() to import 'Layout Component' inside (folder) layout
+
+//! --------- TUGAS: H11 - Data Fetching (1) -------------
+
+
+//! --------- TUGAS: H12 - REST API + CRUD ( Read + Create) -------------
+export default function Notes() {
+  //TODO: 8) define hook -- 'useRouter()' -- route to page: Add
+  const router = useRouter();
+
+  //TODO: 2) define hook -- 'useState()' -- to save the data fetched 
+  //-- from 'listNotes' -- to setNotes(listNotes); --> step: 3
+  const [notes, setNotes] = useState([]);
+
+  //TODO: 1) call API -- via 'useEffect()' <-- client side data fetching
+  useEffect(() => {
+    async function FetchingData() {
+      const res = await fetch("https://paace-f178cafcae7b.nevacloud.io/api/notes");
+      const listNotes = await res.json();
+
+      //TODO: 3) fill 'setNotes()' -- by data from 'listNotes'
+      setNotes(listNotes);
+    }
+    //call function: FetchingData()
+    FetchingData();
+  }, []);
+
+  //TODO: 4) TEST: display data (from API) -- in browser
   console.log('notes data =>', notes);
+
+  //TODO: 5) define styles for data fetched -- using library: Chakra UI
   return (
     <>
-      <LayoutComponent metaTitle="Notes @Top">
-        {/* <p>-- Notes page (test Data Fetching) --</p> */}
-        {/* use map() to loop & display data (from array) */}
-        {notes.data.map((item) => (
+      <LayoutComponent metaTitle="Notes">
+        {/* //! using style component <Box> -- as container*/}
+        <Box padding="5">
 
-          //! TEST: to check data fetching & display data -- without <Link>
-          // <div style={{ border: "1px solid grey", margin: "5px", padding: "5px" }}>
-          //   <p>{item.title}</p>
-          //   <p>{item.description}</p>
-          // </div>
+          {/* //TODO: 7) Button: Add Notes */}
+          <Flex justifyContent="end">
+            <Button
+              colorScheme="blue"
+              onClick={() => router.push("/notes/add")}
+            >
+              Add Notes
+            </Button>
+          </Flex>
 
-          //! when we click note-title > it will open it's detail page 
-          //? the detail for each note -- is in pages/notes/[id].js (dynamic route)
-          <div>
-            <Link href={`/notes/${item.id}`}>{item.title}</Link>
-          </div>
+          {/* //TODO: 6) Grid: Notes -- with button: Edit & Delete */}
+          <Flex>
+            <Grid templateColumns='repeat(3, 1fr)' gap={5}>
+              {
+                notes?.data?.map((item) => (
+                  <GridItem key={item.id}>
+                    <Card>
+                      <CardHeader>
+                        <Heading>{item?.title}</Heading>
+                      </CardHeader>
 
-        ))}
+                      <CardBody>
+                        <Text>{item?.description}</Text>
+                      </CardBody>
+
+                      <CardFooter justify='space-between' flexWrap='wrap'
+                      // sx={{
+                      //   '& > button': {
+                      //     minW: '136px',
+                      //   },
+                      // }}
+                      >
+                        {/* <Button flex='1' variant='ghost' leftIcon={<BiLike />}> */}
+                        <Button onClick={() => router.push(`/notes/edit/${item?.id}`)}
+                          flex="1" colorScheme="purple" >
+                          Edit
+                        </Button>
+                        <Button flex='1' colorScheme="red" >
+                          Delete
+                        </Button>
+                        {/* <Button flex='1' variant='ghost' leftIcon={<BiShare />}>
+                          Share
+                        </Button> */}
+                      </CardFooter>
+
+                    </Card>
+                  </GridItem>
+                ))
+              }
+            </Grid>
+          </Flex>
+
+        </Box>
       </LayoutComponent>
     </>
   )
 };
 
-//! 1) Data Fetching use: 'getstaticProps()' -- as a part of SSG
-//? - after build (npm run build) > it will create a 'static page' (.next/notes.html)
-//? - this page will be cached as pre-rendered page
-
-export async function getStaticProps() {
-  // const res = await fetch('https://api.github.com/repos/vercel/next.js')
-  const res = await fetch("https://paace-f178cafcae7b.nevacloud.io/api/notes");
-  const notes = await res.json();
-
-  // return { props: { notes } } 
-  //! without revalidate - will not update 'client data' when API data changes (BE)
-
-  return { props: { notes }, revalidate: 10 };
-  //it will re-rendered every 10 seconds
-}
-
-//? to check pre-rendered page -- npm run start > localhost:3000 > inspect: Element
 

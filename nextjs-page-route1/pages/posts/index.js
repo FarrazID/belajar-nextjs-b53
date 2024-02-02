@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-import Link from "next/link";
 
 //! Using dynamic import (use wrapper: 'LayoutComponent')
 const LayoutComponent = dynamic(() => import('@/layout'));
