@@ -1,10 +1,9 @@
 import { useMutation } from "@/hooks/useMutation";
 import { useQueries } from "@/hooks/useQueries";
 
+//TODO: this dependencies is used in Tugas H15
 // import fetcher from "@/utils/fetcher";
-import useSWR from "swr";
-//! to make SWR reuseable -- we need dependencies from component: useQueriesSWR
-import { useQueriesSWR } from "@/hooks/useQueriesSWR";
+// import useSWR from "swr";
 
 import dynamic from "next/dynamic";
 // import Link from "next/link";
@@ -24,7 +23,7 @@ const LayoutComponent = dynamic(() => import('@/layout'));
 //! --------- TUGAS: H12 - REST API + CRUD ( Read + Create) -------------
 export default function Notes() {
   const router = useRouter();
-  // const [notes, setNotes] = useState([]);
+  // const [notes, setNotes] = useState([]);  // --this variable is used in Tugas H13 -- not in H14
 
   //! --------- TUGAS: H14 - call API using Custom Hooks -------------
   //TODO: custom-hook: useMutation -- to call API specifically that will 'change data';
@@ -38,34 +37,23 @@ export default function Notes() {
   // const { data, isError, isLoading } = useQueries('api/posts');
   // const { data, isError, isLoading } = useQueries('api/...');
 
-  //TODO: to avoid conflict > retun var (data) -- 'assigned' to new var (listNotes) -- by using `:`
+  //TODO: to avoid conflict > retun var -- assigned to new var -- by using `:`
   // const { data: listNotes, isError: listErrorGetNotes, isLoading } = useQueries('/api/notes');
 
-  //TODO: custom-hook: useQueries -- is disabled -> replaced by useSWR (tugas H15)
-  // const { data: listNotes } = useQueries({
-  //   // prefixUrl: `${process.env.NEXT_PUBLIC_URL_API}/api/notes`,  // -> check @ materi H14 -- using .env
-  //   prefixUrl: `https://paace-f178cafcae7b.nevacloud.io/api/notes`,
-  // });
+  //TODO: customu-hook: useQueries -- is disabled -- replaced by useSWR
+  const { data: listNotes } = useQueries({
+    // prefixUrl: `${process.env.NEXT_PUBLIC_URL_API}/api/notes`,  // -> check @ materi H14 -- using .env
+    prefixUrl: `https://paace-f178cafcae7b.nevacloud.io/api/notes`,
+  });
 
-  // console.log('list notes =>', listNotes);
+  console.log('list notes =>', listNotes);
   //? it's look like call API twice (2x) -- coz it still use hook: useEffect in development mode
   //? after we build project & deploy to server - it will only call once (1x)
 
   //! --------- TUGAS: H15 - Client Side Data Fetching -- using SWR -------------
-  //TODO: useSWR 1) create function: 'fetcher'-- as wrapper of native 'fetch' 
-  // -- u can replace 'fetch' with 'axios'
-  const fetcher = (...args) => fetch(...args).then(res => res.json())
-  //TODO: useSWR 2) import & use 'useSWR' inside function component 'Notes'
-  const { data: listNotes, error, isLoading } =
-    useSWR('https://paace-f178cafcae7b.nevacloud.io/api/notes', fetcher, {
-      revalidateOnFocus: false,
-      refreshInterval: 0,
-    });
+  //TODO: useSWR -- to fetch data from API -- asynchronously
+  // const { data, isLoading } = useSWR('https://paace-f178cafcae7b.nevacloud.io/api/notes', fetcher);
 
-  // console.log('data =>', data);
-  console.log('list notes =>', listNotes);
-  console.log('error =>', error);
-  console.log('isLoading =>', isLoading);
 
   //! --------- TUGAS: H13 - REST API + CRUD ( Edit + Delete) -------------
 
@@ -87,7 +75,7 @@ export default function Notes() {
     //   console.log(error);
     // }
 
-    //! -- from Tugas H14 --
+    //! -- from Tugas H14 (Custom Hooks) --
     //TODO: replace (try ...catch) -- with Custom Hook; useMutation()
     const response = await mutate({
       // url: `${process.env.NEXT_PUBLIC_URL_API}/api/notes/delete/${id}`, 
@@ -139,7 +127,7 @@ export default function Notes() {
           <Flex>
             <Grid templateColumns='repeat(3, 1fr)' gap={5}>
               {
-                // notes?.data?.map((item) => (
+                // notes?.data?.map((item) => (  //! -- from Tugas H14 (Custom Hooks) --
                 listNotes?.data?.map((item) => (
                   <GridItem key={item.id}>
                     <Card>

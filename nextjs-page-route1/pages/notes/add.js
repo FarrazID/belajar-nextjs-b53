@@ -86,7 +86,7 @@ export default function AddNotes() {
                 onChange={(event) =>
                   setNotes({ ...notes, title: event.target.value })
                 }
-              //! data from input Text -- will be saved in 'SetNotes'
+              //! data from input Text (event.target.value) -- will be saved in 'SetNotes'
               />
             </GridItem>
 
