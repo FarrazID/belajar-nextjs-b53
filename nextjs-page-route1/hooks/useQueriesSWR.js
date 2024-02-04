@@ -20,8 +20,15 @@ export const useQueriesSWR = ({ prefixUrl = "" } = {}) => {
   //   }
   // }, []);
 
-  return { data: data || null, error: error || false, isLoading };
+  return {
+    data: data || null,
+    error: error || false,
+    isLoading
+  };
   //TODO: define validation for return value
   //? if data.value exist -- it will return 'data'
   //? if data.value is null -- it will return 'null' instead of 'undefined'
+
+  //? if isLoading = true -- it still fetching data
+  //? if isLoading = false -- it finished fetching data
 };

@@ -67,8 +67,9 @@ export default function Notes() {
   //     refreshInterval: 0,
   //   });
 
+  //! step useSWR 2) -- replaced by custom hook: useQueriesSWR
   //TODO: useSWR 3) import & use 'useQueriesSWR' inside function component 'Notes'
-  const { data: listNotes, error, isLoading } = useQueriesSWR({ prefixUrl: 'https://paace-f178cafcae7b.nevacloud.io/api/notes' });
+  const { data: listNotes, error, isLoading } = useQueriesSWR({ prefixUrl: 'https://paace-f178cafcae7b.nevacloud.io/api/notes' },);
 
   // console.log('data =>', data);
   console.log('list notes =>', listNotes);
@@ -110,18 +111,6 @@ export default function Notes() {
   //! --------- until TUGAS: H13 - we still use react-Hook (useEffect) here -------------
   //? after using Custom Hook -- we don't use react-Hook (useEffect) here 
   //? -- it's moved to hook/useQueries.js 
-  //TODO: 1) call API -- via 'useEffect()' <-- client side data fetching
-  // useEffect(() => {
-  //   async function FetchingData() {
-  //     const res = await fetch("https://paace-f178cafcae7b.nevacloud.io/api/notes");
-  //     const listNotes = await res.json();
-
-  //     //TODO: 3) fill 'setNotes()' -- by data from 'listNotes'
-  //     setNotes(listNotes);
-  //   }
-  //   //call function: FetchingData()
-  //   FetchingData();
-  // }, []);
 
   //TODO: 4) TEST: display data (from API) -- in browser
   // console.log('notes data =>', notes);

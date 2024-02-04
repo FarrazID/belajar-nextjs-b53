@@ -89,7 +89,7 @@ export default function Notes() {
 
   //! --------- until TUGAS: H13 - we still use react-Hook (useEffect) here -------------
   //? after using Custom Hook -- we don't use react-Hook (useEffect) here 
-  //? -- it's moved to hook/useQueries.js 
+  //? -- useEffect() is moved to file: hook/useQueries.js 
   //TODO: 1) call API -- via 'useEffect()' <-- client side data fetching
   // useEffect(() => {
   //   async function FetchingData() {
