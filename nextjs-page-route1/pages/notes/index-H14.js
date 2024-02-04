@@ -40,7 +40,7 @@ export default function Notes() {
   //TODO: to avoid conflict > retun var -- assigned to new var -- by using `:`
   // const { data: listNotes, isError: listErrorGetNotes, isLoading } = useQueries('/api/notes');
 
-  //TODO: customu-hook: useQueries -- is disabled -- replaced by useSWR
+  //TODO: custom-hook: useQueries -- is disabled -- replaced by useSWR
   const { data: listNotes } = useQueries({
     // prefixUrl: `${process.env.NEXT_PUBLIC_URL_API}/api/notes`,  // -> check @ materi H14 -- using .env
     prefixUrl: `https://paace-f178cafcae7b.nevacloud.io/api/notes`,

@@ -2,8 +2,11 @@ import { useMutation } from "@/hooks/useMutation";
 import { useQueries } from "@/hooks/useQueries";
 
 // import fetcher from "@/utils/fetcher";
-import useSWR from "swr";
-//! to make SWR reuseable -- we need dependencies from component: useQueriesSWR
+// import useSWR from "swr";  //TODO: Tugas H15 (2) -- 'fetcher' + 'useSWR' is deprecated 
+//? -- replaced with 'useQueriesSWR'
+
+//! Tugas H15 (2): to make SWR reuseable -- we use 'useQueriesSWR'
+//? -- it's a custom hook (just like 'useQueries'), but using SWR
 import { useQueriesSWR } from "@/hooks/useQueriesSWR";
 
 import dynamic from "next/dynamic";
@@ -54,13 +57,18 @@ export default function Notes() {
   //! --------- TUGAS: H15 - Client Side Data Fetching -- using SWR -------------
   //TODO: useSWR 1) create function: 'fetcher'-- as wrapper of native 'fetch' 
   // -- u can replace 'fetch' with 'axios'
-  const fetcher = (...args) => fetch(...args).then(res => res.json())
+  // const fetcher = (...args) => fetch(...args).then(res => res.json());  
+  //TODO: Tugas H15 (2) -- 'fetcher' + 'useSWR' is deprecated  -- replaced with 'useQueriesSWR'
+
   //TODO: useSWR 2) import & use 'useSWR' inside function component 'Notes'
-  const { data: listNotes, error, isLoading } =
-    useSWR('https://paace-f178cafcae7b.nevacloud.io/api/notes', fetcher, {
-      revalidateOnFocus: false,
-      refreshInterval: 0,
-    });
+  // const { data: listNotes, error, isLoading } =
+  //   useSWR('https://paace-f178cafcae7b.nevacloud.io/api/notes', fetcher, {
+  //     revalidateOnFocus: false,
+  //     refreshInterval: 0,
+  //   });
+
+  //TODO: useSWR 3) import & use 'useQueriesSWR' inside function component 'Notes'
+  const { data: listNotes, error, isLoading } = useQueriesSWR({ prefixUrl: 'https://paace-f178cafcae7b.nevacloud.io/api/notes' });
 
   // console.log('data =>', data);
   console.log('list notes =>', listNotes);
@@ -68,8 +76,8 @@ export default function Notes() {
   console.log('isLoading =>', isLoading);
 
   //! --------- TUGAS: H13 - REST API + CRUD ( Edit + Delete) -------------
-
   const HandleDelete = async (id) => {
+    //! -- from Tugas H13 --
     // try {
     //   const response = await fetch(
     //     `https://paace-f178cafcae7b.nevacloud.io/api/notes/delete/${id}`,
