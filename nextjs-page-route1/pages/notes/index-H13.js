@@ -14,7 +14,7 @@ const LayoutComponent = dynamic(() => import('@/layout'));
 // use dynamic() to import 'Layout Component' inside (folder) layout
 
 //! --------- TUGAS: H11 - Data Fetching (1) -------------
-
+// -- get response data API into state -> use 'spread operator' inside array '[...res.data]'
 
 //! --------- TUGAS: H12 - REST API + CRUD ( Read + Create) -------------
 export default function Notes() {

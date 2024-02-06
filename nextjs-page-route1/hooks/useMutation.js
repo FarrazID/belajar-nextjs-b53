@@ -16,12 +16,14 @@ export const useMutation = () => {
           body: JSON.stringify(payload),
         });
         const result = await response.json();
+
         setData({
           ...data,
           data: result,
           isLoading: false,
         });
         return { ...result };
+
       } catch (error) {
         setData({
           ...data,

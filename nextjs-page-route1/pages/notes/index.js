@@ -159,7 +159,6 @@ export default function Notes() {
                           flex='1' colorScheme="red" >
                           Delete
                         </Button>
-
                       </CardFooter>
 
                     </Card>

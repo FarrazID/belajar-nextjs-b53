@@ -4,7 +4,7 @@ import Header from '@/components/header'
 // import Content from '@/components/content'
 import Footer from '@/components/footer'
 
-//TODO: define 'Layout Component'
+//! -------- Tugas H5: define 'Layout Component' as wrapper (frame) --------
 //? as a wrapper (frame) -- for every routing pages (re-used component)
 //! use prop: {children} as page-router -- (access all react node) to make content-dynamic
 // -- use prop: {metaTitle} to make title-dynamic

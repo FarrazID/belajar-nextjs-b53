@@ -2,7 +2,8 @@
 // import Image from "next/image";
 import dynamic from "next/dynamic";
 
-//! Using Next Image - optimasi loaded-image size: .png --> .webp
+//! -- Tugas H8 : Using wrapper component: 'Layout'
+//! -- Tugas H10: Using Next Image - optimasi loaded-image size: .png --> .webp
 // export default function Main() {
 //   return (
 //     <>
@@ -16,7 +17,8 @@ import dynamic from "next/dynamic";
 //   )
 // };
 
-//! Using dynamic import
+//! -- Tugas H10 : Using Dynamic Import -- to create new wrapper: 'LayoutComponent'
+//? Dynamic import -- reduce size rendering file -- app become faster, support 'Lazy Loading'
 //TODO: create new component -- where all routing pages (@/layout) will be wrapped using dynamic()
 const LayoutComponent = dynamic(() => import('@/layout')); // <-- use dynamic() to import component
 export default function Main() {
