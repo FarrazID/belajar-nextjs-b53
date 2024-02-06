@@ -67,7 +67,7 @@ export default function Notes() {
   //     refreshInterval: 0,
   //   });
 
-  //! step useSWR 2) -- replaced by custom hook: useQueriesSWR
+  //! Tugas H15 (2): step useSWR 2) -- replaced by custom hook: useQueriesSWR
   //TODO: useSWR 3) import & use 'useQueriesSWR' inside function component 'Notes'
   const { data: listNotes, error, isLoading } = useQueriesSWR({ prefixUrl: 'https://paace-f178cafcae7b.nevacloud.io/api/notes' },);
 

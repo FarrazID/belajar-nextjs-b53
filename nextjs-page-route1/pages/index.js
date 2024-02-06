@@ -20,6 +20,7 @@ import dynamic from "next/dynamic";
 //! -- Tugas H10 : Using Dynamic Import -- to create new wrapper: 'LayoutComponent'
 //? Dynamic import -- reduce size rendering file -- app become faster, support 'Lazy Loading'
 //TODO: create new component -- where all routing pages (@/layout) will be wrapped using dynamic()
+
 const LayoutComponent = dynamic(() => import('@/layout')); // <-- use dynamic() to import component
 export default function Main() {
   return (
