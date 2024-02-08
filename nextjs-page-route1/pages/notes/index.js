@@ -1,9 +1,10 @@
 import { useMutation } from "@/hooks/useMutation";
 import { useQueries } from "@/hooks/useQueries";
 
-// import fetcher from "@/utils/fetcher";
-// import useSWR from "swr";  //TODO: Tugas H15 (2) -- 'fetcher' + 'useSWR' is deprecated 
+//TODO: Tugas H15 (2) -- 'fetcher' + 'useSWR' is deprecated 
 //? -- replaced with 'useQueriesSWR'
+// import fetcher from "@/utils/fetcher";
+// import useSWR from "swr";  
 
 //! Tugas H15 (2): to make SWR reuseable -- we use 'useQueriesSWR'
 //? -- it's a custom hook (just like 'useQueries'), but using SWR
@@ -103,6 +104,7 @@ export default function Notes() {
       url: `https://paace-f178cafcae7b.nevacloud.io/api/notes/delete/${id}`,
       method: "DELETE",
     });
+
     if (response?.success) {
       router.reload();
     }

@@ -1,28 +1,71 @@
 import Link from "next/link";
-import withAuth from "../with-auth";
-// import Menu from "../menu";
+
+import { Menu, MenuButton, MenuList, MenuItem, Button } from "@chakra-ui/react";
+import { ChevronDownIcon } from "@chakra-ui/icons";
+
+import { useQueries } from "@/hooks/useQueries";
+import { useMutation } from "@/hooks/useMutation";
+import Cookies from "js-cookie";
+import { useRouter } from "next/router";
+
 import styles from "./styles.module.css";
 
-// use Snippet enf -- export name function
-// use Snippet edf -- export default function
-function Header() {
-  return (
-    //! for simulation: call component: Menu() -- from 'header' area
-    // <div className={styles.header}>
-    //   <Menu />
-    //   <p>Header section</p>
-    // </div>
+export default function Header() {
+  const router = useRouter();
+  const { mutate } = useMutation();
+  const { data } = useQueries({
+    prefixUrl: "https://paace-f178cafcae7b.nevacloud.io/api/user/me",
+    headers: {
+      Authorization: `Bearer ${Cookies.get("user_token")}`,
+    },
+  });
 
+  const HandleLogout = async () => {
+    const response = await mutate({
+      url: "https://paace-f178cafcae7b.nevacloud.io/api/logout",
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${Cookies.get("user_token")}`,
+      },
+    });
+    if (!response?.success) {
+      console.log("gagal logout");
+    } else {
+      Cookies.remove("user_token");
+      router.push("/login");
+    }
+  };
+
+  return (
     <div className={styles.header}>
       <ul>
-        <li><Link href="/">Home</Link></li>
-        <li><Link href="/profile">Profile</Link></li>
-        <li><Link href="/users">User</Link></li>
-        <li><Link href="/notes">Notes</Link></li>
+        <li>
+          <Link href="/">Home</Link>
+        </li>
+        <li>
+          <Link href="/profile">Profile</Link>
+        </li>
+        <li>
+          <Link href="/users">Users</Link>
+        </li>
+        <li>
+          <Link href="/notes">Notes</Link>
+        </li>
+        <li>
+          <Link href="/posts">Posts</Link>
+        </li>
+        <li>
+          <Menu>
+            <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+              {/* <MenuButton as={Button} > */}
+              {data?.data?.name}
+            </MenuButton>
+            <MenuList>
+              <MenuItem onClick={() => HandleLogout()}>Logout</MenuItem>
+            </MenuList>
+          </Menu>
+        </li>
       </ul>
     </div>
   );
-};
-
-export default withAuth(Header); //! this method is updated, instead of bootcamp-video
-// export default Header;
+}

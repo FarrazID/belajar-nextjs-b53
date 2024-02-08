@@ -5,7 +5,7 @@ export default function Profile() {
   return (
     <>
       <Layout metaTitle="Profile" metaDescription="Informasi terkait user-profile">
-        <p>-- Profile page --</p>
+        <p>-- Profile page V2 (routing-file) --</p>
       </Layout>
     </>
   )
