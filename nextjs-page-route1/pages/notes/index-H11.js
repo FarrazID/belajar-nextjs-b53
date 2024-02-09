@@ -36,9 +36,12 @@ export default function Notes({ notes }) {
 
 
 //! --------- TUGAS: H11 - Data Fetching (2) -------------
-//! 1) Data Fetching use: 'getstaticProps()' -- as a part of SSG
+//! 1)  Data Fetching (from API) using: 'getstaticProps()'-- as a part of SSG (Static Site Generation)
+// -- used to fetch data during the build process
+// -- During the build, Next.js generates a 'static HTML file' for this page
+
 //? - after build (npm run build) > it will create a 'static page' (.next/notes.html)
-//? - this page will be cached as pre-rendered page
+//? - this page will be cached as 'pre-rendered page'
 
 export async function getStaticProps() {
   // const res = await fetch('https://api.github.com/repos/vercel/next.js')
@@ -54,7 +57,11 @@ export async function getStaticProps() {
 
 //? to check pre-rendered page -- npm run start > localhost:3000 > inspect: Element
 
-//! --------- TUGAS: H12 - REST API + CRUD (1) -------------
-//TODO: define new file: pages/notes/index.js
-
-
+//! Advantages of SSG;
+//? Improved Performance -- Users receive pre-generated static HTML files, resulting in faster page loads.
+//? SEO-Friendly -- Search engines can easily crawl and index static pages, improving search engine rankings.
+//? Reduced Server Load -- Since pages are generated at build time, there's less server-side processing
+//?     needed at runtime, reducing server load.
+//? CDN Compatibility -- Static files can be easily cached and distributed on CDNs for better global performance.
+//? Cost-Efficiency -- Hosting and serving static files can be more cost-effective compared to
+//?     dynamic server-side rendering.

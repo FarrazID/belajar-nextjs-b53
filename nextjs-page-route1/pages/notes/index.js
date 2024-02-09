@@ -31,11 +31,12 @@ export default function Notes() {
   // const [notes, setNotes] = useState([]);
 
   //! --------- TUGAS: H14 - call API using Custom Hooks -------------
-  //TODO: custom-hook: useMutation -- to call API specifically that will 'change data';
+  //? Custom hooks -- membuat 'reusable hooks' yang 'lebih simple' dan 'adaptive'
+  //TODO: custom-hook: 'useMutation' -- to call API specifically that will 'change data';
   // -- create, update, delete data
   const { mutate } = useMutation();
 
-  //TODO: custom-hook: useQueries -- to call API with default method 'GET'
+  //TODO: custom-hook: 'useQueries' -- to call API with default method 'GET'
   //? if we use some variable  (hook) -- coz it has same 'return variables' (via object {...}) 
   //? -- it can conflict, as sample below;
   // const { data, isError, isLoading } = useQueries('/api/notes');

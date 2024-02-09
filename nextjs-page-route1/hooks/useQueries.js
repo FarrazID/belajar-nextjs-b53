@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 
-//TODO: 1) define custom hook 'useQueries'
+//! --- Tugas H14: Create new Custom-Hooks for Data Fetching ---
+//TODO: custom-hook: 'useQueries' -- to call API with default method 'GET'
 export const useQueries = ({ prefixUrl = "" } = {}) => {
   const [data, setData] = useState({
     data: null,
@@ -8,7 +9,6 @@ export const useQueries = ({ prefixUrl = "" } = {}) => {
     isError: false,
   });
 
-  //TODO: 2) define funtion to fetch data
   const fetchingData = useCallback(
     async ({ url = "", method = "GET" } = {}) => {
       try {

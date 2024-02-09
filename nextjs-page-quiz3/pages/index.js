@@ -8,9 +8,11 @@ import {
   Heading, Stack, Text, useDisclosure
 } from '@chakra-ui/react'
 import { AddIcon, DeleteIcon, EditIcon } from '@chakra-ui/icons'
-import ModalForm from '@/components/modalForm'
+
 import { useGlobalContext } from '@/context/global'
 import { useState } from 'react'
+
+import ModalForm from '@/components/modalForm'
 import ConfirmationModal from '@/components/confirmation_modal'
 
 // const inter = Inter({ subsets: ['latin'] })
@@ -109,6 +111,7 @@ export async function getStaticProps() {
     const response = await fetch('https://paace-f178cafcae7b.nevacloud.io/api/notes')
     const notes = await response.json()
     return { props: { notes }, revalidate: 10 }
+
   } catch (err) {
     return { props: { notes: null } }
   }

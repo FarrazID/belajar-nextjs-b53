@@ -1,8 +1,8 @@
-import Head from 'next/head'
+import Head from 'next/head';
 
-import Header from '@/components/header'
+import Header from '@/components/header/index';
 // import Content from '@/components/content'
-import Footer from '@/components/footer'
+import Footer from '@/components/footer';
 
 //! -------- Tugas H5: define 'Layout Component' as wrapper (frame) --------
 //? as a wrapper (frame) -- for every routing pages (re-used component)

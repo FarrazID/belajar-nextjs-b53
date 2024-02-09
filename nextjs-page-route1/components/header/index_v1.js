@@ -1,4 +1,6 @@
 import Link from "next/link";
+
+//TODO: call HOC (withAuth) as a function -- no bracket {..}
 import withAuth from "../with-auth";
 // import Menu from "../menu";
 import styles from "./styles.module.css";
@@ -26,5 +28,7 @@ function Header() {
   );
 };
 
-export default withAuth(Header); //! this method is updated, instead of bootcamp-video
-// export default Header;
+export default withAuth(Header); //! using HOC 
+//? -- to isolate access (component 'Header') for 'admin-only' & 'users'
+//? -- this method is updated, instead of bootcamp-video
+// export default Header; //! without HOC
